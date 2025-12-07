@@ -6,6 +6,7 @@ import com.kadri.mtp.model.TaskStatus;
 import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.UUID;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.ReentrantLock;
 
+@Component
 public class TaskProcessor {
     private static final Logger logger = LoggerFactory.getLogger(TaskProcessor.class);
     private final ExecutorService executor;
