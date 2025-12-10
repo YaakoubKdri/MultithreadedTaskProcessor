@@ -1,3 +1,25 @@
-spring:
-  application:
-    name: mtp
+resilience4j:
+  circuitbreaker:
+    instances:
+      taskService:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        automaticTransitionFromOpenToHalfOpenEnabled: false
+
+  retry:
+    instances:
+      taskService:
+        maxAttempts: 3
+        waitDuration: 500ms
+        enableExponentialBackoff: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
